@@ -32,7 +32,6 @@ jobs:
             
             git checkout develop
             git pull origin develop
-            mvn clean install -DskipTests
             
             docker stop database-docker
             docker rm database-docker

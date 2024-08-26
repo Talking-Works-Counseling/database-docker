@@ -1,0 +1,49 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: develop
+
+    steps:
+      - name: creating pem file
+        run: |
+          echo "${PEM_FILE}" > talking-works-dev.pem
+        env:
+          PEM_FILE: ${{ secrets.DEV_PEM_FILE }}
+
+      - name: login into ec2 and automating the script
+        run: |
+          chmod 600 talking-works-dev.pem
+          ssh -tt -i talking-works-dev.pem -o StrictHostKeyChecking=no ${{ secrets.DEV_EC2_USER }}@${{ secrets.DEV_EC2_HOST }} << 'EOF'
+            
+            cd talking-works-dev/
+            cd database-docker/
+
+            eval "$(ssh-agent)"
+            ssh-add ~/talking_works_github_ssh
+            
+            git checkout develop
+            git pull origin develop
+            mvn clean install -DskipTests
+            
+            docker stop database-docker
+            docker rm database-docker
+            docker rmi database-docker:latest
+            
+            docker build -t database-docker:latest .
+            docker run \
+            -p 5432:5432 --name database-docker  \
+            --network ${{secrets.DEV_BACKEND_NETWORK}} \
+            -d service-discovery:latest \
+            -v pgdata:/var/lib/postgresql/data \
+          
+            exit
+          EOF

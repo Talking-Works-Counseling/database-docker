@@ -1,5 +1,5 @@
 # Use the official PostgreSQL image from the Docker Hub
-FROM postgres:latest
+FROM postgres:12.6 as postgres
 
 # Set environment variables for PostgreSQL
 # These are default values; you can override them at runtime

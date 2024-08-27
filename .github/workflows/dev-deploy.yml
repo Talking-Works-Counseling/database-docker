@@ -41,7 +41,6 @@ jobs:
             -p 5432:5432 --name database-docker  \
             --network ${{secrets.DEV_BACKEND_NETWORK}} \
             -d database-docker:latest \
-            -v pgdata:/var/lib/postgresql/data \
           
             exit
           EOF

@@ -30,7 +30,6 @@ jobs:
             
             git checkout qa
             git pull origin qa
-            mvn clean install -DskipTests
             
             docker stop database-docker
             docker rm database-docker

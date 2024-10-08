@@ -1,1 +1,1 @@
-CREATE DATABASE IF NOT EXISTS talking_works_dev;
+CREATE DATABASE IF NOT EXISTS talking_works_qa;

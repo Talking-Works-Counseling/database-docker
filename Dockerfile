@@ -5,7 +5,7 @@ FROM postgres:latest
 # These are default values; you can override them at runtime
 ENV POSTGRES_USER=talkingworks
 ENV POSTGRES_PASSWORD=postgres
-ENV POSTGRES_DB=talking_works_dev
+ENV POSTGRES_DB=talking_works_qa
 
 # Optional: Copy any initialization scripts into the Docker image
 # You can use this to add custom SQL scripts

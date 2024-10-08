@@ -27,7 +27,6 @@ jobs:
             cd talking-works-qa/
             cd database-docker/
 
-            
             git checkout qa
             git pull origin qa
             

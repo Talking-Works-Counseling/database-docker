@@ -39,6 +39,7 @@ jobs:
             docker build -t database-docker:latest .
             docker run \
             -p 5432:5432 --name database-docker  \
+            -v dev-database-dumb:/var/lib/postgresql/data \
             --network ${{secrets.DEV_BACKEND_NETWORK}} \
             -d database-docker:latest \
           

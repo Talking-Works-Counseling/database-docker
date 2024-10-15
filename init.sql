@@ -10,8 +10,9 @@ $$;
 
 DO $$
 BEGIN
-   -- Check if 'keycloak' database exists, if not, create it
-   IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'keycloak') THEN
+   IF NOT EXISTS (
+      SELECT FROM pg_database WHERE datname = 'keycloak'
+   ) THEN
       PERFORM dblink_exec('dbname=postgres', 'CREATE DATABASE keycloak');
    END IF;
 END

@@ -36,9 +36,9 @@ jobs:
             docker build -t database-docker:latest .
             docker run \
             -p 5432:5432 --name database-docker  \
+            -v qa-database-dumb:/var/lib/postgresql/data \
             --network ${{secrets.QA_BACKEND_NETWORK}} \
             -d database-docker:latest \
-            -v pgdata:/var/lib/postgresql/data \
           
             exit
           EOF

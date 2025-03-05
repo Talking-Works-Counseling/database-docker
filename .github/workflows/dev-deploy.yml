@@ -22,20 +22,20 @@ jobs:
         run: |
           chmod 600 talking-works-dev.pem
           ssh -tt -i talking-works-dev.pem -o StrictHostKeyChecking=no ${{ secrets.DEV_EC2_USER }}@${{ secrets.DEV_EC2_HOST }} << 'EOF'
-            
+          
             cd talking-works-dev/
             cd database-docker/
 
             eval "$(ssh-agent)"
             ssh-add ~/talking_works_github_ssh
-            
+          
             git checkout develop
             git pull origin develop
-            
+          
             docker stop database-docker
             docker rm database-docker
             docker rmi database-docker:latest
-            
+          
             docker build -t database-docker:latest .
             docker run \
             -p 5432:5432 --name database-docker  \

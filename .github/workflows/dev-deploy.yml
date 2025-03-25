@@ -43,5 +43,5 @@ jobs:
             --network ${{secrets.DEV_BACKEND_NETWORK}} \
             -d database-docker:latest \
           
-            exit
+            exit 
           EOF

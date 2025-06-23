@@ -14,4 +14,5 @@ COPY ./init.sql /docker-entrypoint-initdb.d/
 # Expose PostgreSQL port
 EXPOSE 5432
 
+
 # The official PostgreSQL image already has the default command set to run PostgreSQL 
